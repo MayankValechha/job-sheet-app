@@ -2,6 +2,8 @@
     
     require 'config/database.php';
 
+    session_start();
+
     //Vairbles for form fields
     $shop_name = $shop_address = $shop_contact = $shop_email = '';
     $password = $confirm_password = '';
@@ -31,7 +33,7 @@
         //Query to check any existing user in the database
         $check_existing_user = "SELECT * FROM `shopkeepers` 
                                 WHERE 
-                                contact = '$shop_contact' or email = '$shop_email' 
+                                contact = '$shop_contact'
                                 LIMIT 1";
 
         $results = mysqli_query($db_connect, $check_existing_user);
@@ -43,9 +45,19 @@
         
 
         //Regitsering user if no errors in the error array
-        if(count($errors == 0)) {
+        if(count($errors) == 0) {
             //Encrypting Password before saving into database
             $password_enc = md5($password);
+
+            $query = "INSERT INTO `shopkeepers` (name, address, email, contact, password) 
+                      VALUES ('$shop_name', '$shop_address', '$shop_email', '$shop_contact', '$password_enc')";
+            
+            mysqli_query($db_connect, $query);
+
+            $_SESSION['username'] = $shop_name;
+            $_SESSION['success'] = "You are logged in!";
+
+            header('Location: dashboard.php');
             
         }
     }
