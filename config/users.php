@@ -85,16 +85,13 @@
         $password = mysqli_real_escape_string($db_connect, $_POST['password']);
 
         //Validation Username and Password
-        if(empty($username)) {
-            if(strlen($username) != 10 ) {
-                array_push($errors, 'Mobile Number cannot be empty or Not more than 10 Characters.');
-            }
-        }                         
+        if(empty($username) || strlen($username) != 10 ) {
+            array_push($errors, 'Mobile Number cannot be empty or Not more than 10 Characters.');
+        }
+                                 
 
-        if(empty($password)) {
-            if(strlen($password) < 6){
-                array_push($errors, 'Password cannot be empty or Password Incorrect.');
-            }
+        if(empty($password) || strlen($password) < 6) {
+            array_push($errors, 'Password cannot be empty or Password Incorrect.');
         }
 
         //Checking for Errors in errors array()
@@ -112,7 +109,7 @@
                 header('Location: dashboard.php');
             }
             else {
-                array($errors, "Invalid Credentials!");
+                array_push($errors, "Invalid Credentials!");
             }
         }
     }
