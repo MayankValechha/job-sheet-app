@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +10,8 @@
     <title>Document</title>
 </head>
 <body>
-    Welcome Shopkeeper!! ;D
+    <h1>Welcome</h1>
+    <?php echo $_SESSION['success'];?>
+    <?php echo $_SESSION['username']; ?> 
 </body>
 </html>
