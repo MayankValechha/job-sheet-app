@@ -5,11 +5,13 @@
 
     require 'config/database.php';
 
-    if(isset($_SESSION['shopID'])) {
-        $shop_id = $_SESSION['shopID'];
+    if(isset($_GET['shopID'])) {
+        
+        //Instead of Sessions, Getting shopID via URL
+        $shop_id = $_GET['shopID'];
 
         $query = "SELECT * FROM `shopkeepers` WHERE shop_id = '$shop_id'";
-
+        
         $result = mysqli_query($db_connect, $query);
     
         $shop_info = mysqli_fetch_assoc($result);

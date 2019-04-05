@@ -33,8 +33,10 @@
         <h3>Welcome <b><?php echo $shop['name']; ?></b></h3>
         <h4 class="alert alert-success"><?php echo $_SESSION['success']; ?></h4>
         <br><br>
-        <?php $_SESSION['shopID'] = $shop['shop_id'];?> 
-        <h3><a href="createJobsheet.php">Create Jobsheet</a></h3>
+        
+        <!-- Sending shopID via URL -->
+        <h3><a href="createJobsheet.php?shopID=<?php echo $shop['shop_id']; ?>">Create Jobsheet</a></h3>
+        
         <br><br>
         
         <!-- Shopkeeper Details -->
