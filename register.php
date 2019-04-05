@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
-    <title>Job Sheet Application | Register Shopkeeper</title>
+    <title>Register Shopkeeper | Job Sheet Application</title>
 
     <style>
         label {
@@ -41,7 +41,7 @@
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
                             <label for="shop-name">Shop Name</label>
-                            <input type="text" name="shop_name" class="form-control" require autocomplete>
+                            <input type="text" name="shop_name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="shop-address">Shop Address</label>
