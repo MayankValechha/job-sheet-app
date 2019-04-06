@@ -30,11 +30,16 @@
 </head>
 <body>
     <?php if(isset($_SESSION['username'])): ?>
+        
         <h3>Welcome <b><?php echo $shop['name']; ?></b></h3>
+        
         <h4 class="alert alert-success"><?php echo $_SESSION['success']; ?></h4>
+        
         <br><br>
+        
         <?php $_SESSION['shopID'] = $shop['shop_id'];?> 
         <h3><a href="createJobsheet.php">Create Jobsheet</a></h3>
+        
         <br><br>
         
         <!-- Shopkeeper Details -->
