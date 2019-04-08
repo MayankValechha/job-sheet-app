@@ -15,6 +15,10 @@
         $shop_info = mysqli_fetch_assoc($result);
     }
 
+    if(isset($_POST['submit_job'])) {
+        echo 'Submitted';
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -25,79 +29,112 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
     <title>Create Jobsheet | Job Sheet Application</title>
+    
     <style>
-        .jobsheet-wrapper {
-            border: 2px solid black;
+
+        .wrapper {
+            border:2px solid black;
+            padding:0;
         }
 
-        .header{
-            padding:10px;
-            border:1px solid black;
+        .wrapper .header {
+            padding:10px 20px;
         }
-        ::placeholder {
-            font-weight:bold;
-            color:black !important;
+
+        .header h1 {
+            border-bottom:1px solid black;
         }
-        input, textarea{
-            border:1px solid black !important;
-            padding:25px 10px !important;
+        
+        p {
+            margin:0 0 8px 0;
         }
+
         .sub-header {
-            width:60%;
+            border-right:1px solid black;
         }
-        
-        .sub-sub-header {
-            width:40%;
-        }
-        
     </style>
 </head>
 
 <body>
+    <!-- NEW STYLING -->
+    
+    <!-- START OF CONTAINER -->
     <div class="container">
+        <!-- START OF MAIN ROW -->
         <div class="row">
-            <div class="col-lg-12 col-xm-12 col-sm-12">
-                <div class="jobsheet-wrapper">
+            <div class="wrapper col-lg-12- col-md-12 col-sm-12">
+                <div class="header">
+                    <h1><?php echo $shop_info['name']; ?></h1>
 
-                    <div class="header">
-                        <!-- Shop Name -->
-                        <h2><?php echo $shop_info['name']; ?></h2>
-                        <div class="sub-header">
-
-                            <!-- Address and Contact Info of Shopkeeper -->
-                            <p class="lead"><?php echo $shop_info['address']; ?></p>
-                            <p class="lead"><?php echo $shop_info['contact']; ?></p>
-
-                            <!-- Date and Jobsheet Number Goes here -->
-                            <div class="sub-sub-header">
-                                <?php echo date("d/m/Y"); ?>
+                    <!-- START OF SUB-ROW  -->
+                    <div class="row">
+                        <div class="sub-header col-md-8 col-lg-9 col-sm-6">
+                            <div class="">
+                                <p><?php echo $shop_info['address']; ?></p>
+                                <p><?php echo "+91".$shop_info['contact']; ?></p>
                             </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-sm-6">
+                            <p><b>Job No.:</b> 50</p>
+                            <p><b>Date: </b><?php echo date("d/M/Y"); ?></p>
                         </div>
                     </div>
-                    <form action="">
-                        <div class="form-group">
-                            <input type="text" name="customer_name" class="form-control" placeholder="Customer Name">
-                            <input type="text" name="customer_contact" class="form-control" placeholder="Customer Contact">
-                            <div class="form-inline">
-                                <input type="text" name="mobile_model" class="form-control" placeholder="Model" style="width: 50%;">
-                                <input type="text" name="mobile_imei" class="form-control" placeholder="IMEI" style="width: 50%;">
-                            </div>
-                            <div class="form-inline">
-                                <input type="text" name="other_things" class="form-control" placeholder="Others" style="width: 50%;">
-                                <input type="text" name="condition_of_mobile" class="form-control" placeholder="Condition" style="width: 50%;">
-                            </div>
-                            <input type="text" name="condition_of_mobile" class="form-control" placeholder="Condition of Mobile">
-                            <label for="description">DESCRIPTION</label>
-                            <br>
-                            <div class="clearfix">
-                                <textarea name="problem" class="form-control float-left" placeholder="Problem" style="width:70%; resize:none;"></textarea>
-                                <input type="text" name="estimated_amount" class="form-control float-right" style="width:30%"; placeholder="Amount">
-                            </div>
-                        </div>
-                    </form>
+                    <!-- END OF SUB-ROW -->
                 </div>
+                <!-- END OF .header -->
+
+                <!-- START OF FORM -->
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="POST">
+                    <div class="form-group" style="margin:0;">
+                        <!-- 100% Width of Inputs -->
+                        <input type="text" name="customer_name" class="form-control" placeholder="Customer Name">
+                        <input type="text" name="customer_contact" class="form-control" placeholder="Customer Contact">
+                        
+                        <!-- 50% Width of Inputs -->
+                        <div class="form-inline">
+                            <input type="text" name="mobile_model" class="form-control" placeholder="Model" style="width: 50%;">
+                            <input type="text" name="mobile_imei" class="form-control" placeholder="IMEI" style="width: 50%;">
+                        </div>
+
+                        <!-- 50% Width of Inputs -->
+                        <div class="form-inline">
+                            <input type="text" name="other_things" class="form-control" placeholder="Others" style="width: 50%;">
+                            <input type="text" name="password_of_mobile" class="form-control" placeholder="Password" style="width: 50%;">
+                        </div>
+
+                        <!-- 100% Width of Inputs -->
+                        <input type="text" name="condition_of_mobile" class="form-control" placeholder="Condition of Mobile">
+                        <br>
+                        <br>
+                    </div>
+
+                    <!-- START OF FORM ROW -->
+                    <div class="row">
+                        <div class="col-md-8 col-lg-9 col-sm-6 col-xs-6" style="padding-right:0;">
+                            <input type="text" name="problem_in_mobile" class="form-control" placeholder="Problem">
+                            <input type="text" name="problem_in_mobile" class="form-control" placeholder="">
+                            <input type="text" name="problem_in_mobile" class="form-control" placeholder="">
+                            <input type="text" name="problem_in_mobile" class="form-control" placeholder="">
+                            <input type="text" name="problem_in_mobile" class="form-control" placeholder="">
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3" style="padding-left:0;">
+                            <input type="text" name="estimate1" class="form-control" placeholder="Amount">
+                            <input type="text" name="estimate2" class="form-control" placeholder="">
+                            <input type="text" name="estimate3" class="form-control" placeholder="">
+                            <input type="text" name="estimate4" class="form-control" placeholder="">
+                            <input type="text" name="estimate5" class="form-control" placeholder="">
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Submit Jobsheet" name="submit_job" class="btn btn-primary">
+                    <!-- END OF FORM ROW -->
+                </form>
+                <!-- END OF FORM -->
             </div>
         </div>
+        <!-- END OF MAIN ROW -->
     </div>
+    <!-- END OF CONTAINER -->
 </body>
 </html>
