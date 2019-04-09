@@ -1,6 +1,10 @@
 <?php 
     require 'config/database.php';
     include 'config/users.php';
+
+    if(isset($_SESSION['username'])) {
+        header('Location: dashboard.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="row">
@@ -35,6 +38,10 @@
 
                     <!-- File for showing errors -->
                     <?php include 'errors.php'; ?>
+
+                    <?php if(isset($_SESSION['successful'])) : ?>
+                        <h5 class="alert alert-success"> <?php echo $_SESSION['successful']; ?></h5>
+                    <?php endif; ?>
 
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
