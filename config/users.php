@@ -62,8 +62,9 @@
 
             $_SESSION['username'] = $shop_name;
             $_SESSION['success'] = "You are logged in!";
+            $_SESSION['successful'] = "Your account has been created succesfully! Login below";
 
-            header('Location: dashboard.php');
+            header('Location: login.php');
             
         }
     }
