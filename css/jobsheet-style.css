@@ -1,0 +1,91 @@
+/* Overwriting bootstrap classes */
+.form-group {
+    padding: 20px;
+}   
+.form-control {
+    margin: 0 0 10px 0;
+}
+p {
+    margin:0 0 8px 0;
+}
+label {
+    display:inline-block;
+    width:15%;
+    font-weight:bold;
+}
+
+/* Customizing own classes */
+.wrapper {
+    border:2px solid black;
+    padding:0;            
+}
+.wrapper .header {
+    padding:10px 20px;
+}
+.header h1 {
+    border-bottom:1px solid black;
+}
+.sub-header {
+    border-right:1px solid black;
+}
+hr {
+    border-bottom: 1px solid black;
+}
+input.form-control {
+    display:inline-block;
+    width:84%;
+}
+input.half-width {
+    width:34%;
+}
+input.full-width {
+    vertical-align: middle;
+    margin-right:5px;
+}
+label.checkbox {
+    width:14%;
+}
+.note {
+    padding: 20px;
+    border:1px solid black;
+    display:inline-block;
+    width:70%;
+}
+.signature {
+    padding: 20px;
+    display:inline-block;
+    width:29%;
+}
+.signature p {
+    text-align:center;  
+}
+
+/* On Medium and Smaller Screen */
+@media(max-width:768px) {
+    
+    input.form-control {
+        display:block;
+        width:100%;
+    }
+    label {
+        display:inline-block;
+        width:49%;
+        font-weight:bold;
+    }
+    label.checkbox {
+        width:25%;
+    }
+    input.half-width {
+        width:49%;
+        display:inline-block;
+    }
+    .sub-header {
+        border:none;
+    }
+    .note {
+        width: 100%;
+    }
+    .signature{
+        display: none;
+    }
+}
