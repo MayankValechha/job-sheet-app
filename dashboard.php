@@ -16,6 +16,14 @@
 
         //Setting Shop ID in SESSIONS for CreateJobsheet page
         $_SESSION['shop_id'] = $shop['shop_id'];
+        // Dashboard Main Functionalities
+        $query = "SELECT * FROM `jobsheet`";
+
+        $results = mysqli_query($db_connect, $query);
+
+        $data = mysqli_fetch_all($results, MYSQLI_ASSOC);
+        
+        var_dump($data);
     }
 ?>
 
@@ -39,7 +47,14 @@
         
         <?php $_SESSION['shopID'] = $shop['shop_id'];?> 
         <h3><a href="createJobsheet.php">Create Jobsheet</a></h3>
-        
+        <br>
+        <h3><a href="viewJobsheets.php">View Jobsheets</a></h3>
+        <br>
+        <h3><a href="viewProfile.php">View Profile</a></h3>
+
+        <?php foreach($data as $dataa) : ?>
+    
+        <?php endforeach;?>
         <br><br>
         
         <!-- Shopkeeper Details -->
@@ -66,5 +81,6 @@
         <?php var_dump($_SESSION); ?>
     </div>
     
+    <?php include 'includes/footer.php'; ?>
 </body>
 </html> 
