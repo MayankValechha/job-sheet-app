@@ -30,8 +30,26 @@
         $password_of_mobile = mysqli_real_escape_string($db_connect, $_POST['password_of_mobile']);
         $condition_of_mobile = mysqli_real_escape_string($db_connect, $_POST['condition_of_mobile']);
         
-        $problem = mysqli_real_escape_string($db_connect, $_POST['problem_in_mobile1']);
-        $amount = mysqli_real_escape_string($db_connect, $_POST['estimate1']);
+        //Getting Checkbox values
+        $liquid_damaged = $_POST['liquid_damaged'];
+        $physical_damaged = $_POST['physical_damaged'];
+        $tempered = $_POST['tempered'];
+
+        if(isset($_POST['liquid_damaged'])) {
+            $liquid_damaged = true;
+        }
+
+        if(isset($_POST['physical_damaged'])) {
+            $physical_damaged = true;
+        }
+
+        if(isset($_POST['tempered'])) {
+            $tempered = true;
+        }
+
+        //Casting amount variable into int
+        $problem = mysqli_real_escape_string($db_connect, $_POST['problem_in_mobile']);
+        $amount = (int)mysqli_real_escape_string($db_connect, $_POST['estimate']);
 
         $query = "
                     INSERT INTO `jobsheet`
@@ -43,23 +61,39 @@
                     password, 
                     other_things, 
                     condition_of_mobile,
+                    isLiquidDamaged,
+                    isPhysicalDamaged,
+                    isTempered,
                     problem_description, 
-                    estimated_amount, shop_id)
+                    estimated_amount, 
+                    shop_id)
                     VALUES
-                    ('$customer_name', '$customer_contact', '$customer_email', '$mobile_model', '$mobile_imei', '$password_of_mobile', '$other_things', '$condition_of_mobile','$problem', '$amount', '$shop_ID')";
+                    ('$customer_name', 
+                    '$customer_contact', 
+                    '$customer_email', 
+                    '$mobile_imei', 
+                    '$mobile_model', 
+                    '$password_of_mobile', 
+                    '$other_things', 
+                    '$condition_of_mobile',
+                    '$liquid_damaged',
+                    '$physical_damaged',
+                    '$tempered',
+                    '$problem', 
+                    '$amount', 
+                    '$shop_ID')";
                             
         if(!mysqli_query($db_connect, $query)) 
         {
             die('Error : '.mysqli_errno($db_connect));
         }
         else 
-        {
+        {  
             header('Location: dashboard.php');
+            //Alert: New Jobsheet has been created.
             exit();
         }
-
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -70,34 +104,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
     <title>Create Jobsheet | Job Sheet Application</title>
-
-    <style>
-        .wrapper {
-            border:2px solid black;
-            padding:0;
-        }
-
-        .wrapper .header {
-            padding:10px 20px;
-        }
-
-        .header h1 {
-            border-bottom:1px solid black;
-        }
-        
-        p {
-            margin:0 0 8px 0;
-        }
-
-        .sub-header {
-            border-right:1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="css/jobsheet-style.css">
 </head>
 
 <body>
     <!-- NEW STYLING -->
-    
     <!-- START OF CONTAINER -->
     <div class="container">
         <!-- START OF MAIN ROW -->
@@ -122,55 +133,79 @@
                     </div>
                     <!-- END OF SUB-ROW -->
                 </div>
+                <hr>
                 <!-- END OF .header -->
 
                 <!-- START OF FORM -->
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="POST">
                     <div class="form-group" style="margin:0;">
                         <!-- 100% Width of Inputs -->
+                        <label for="customer name">Customer Name : </label>
                         <input type="text" name="customer_name" class="form-control" placeholder="Customer Name">
+                        <label for="customer contact">Customer Contact : </label>
                         <input type="text" name="customer_contact" class="form-control" placeholder="Customer Contact">
+                        <label for="customer email">Customer Email : </label>
                         <input type="text" name="customer_email" class="form-control" placeholder="Customer Email">
                         
-                        <!-- 50% Width of Inputs -->
-                        <div class="form-inline">
-                            <input type="text" name="mobile_model" class="form-control" placeholder="Model" style="width: 50%;">
-                            <input type="text" name="mobile_imei" class="form-control" placeholder="IMEI" style="width: 50%;">
-                        </div>
 
                         <!-- 50% Width of Inputs -->
-                        <div class="form-inline">
-                            <input type="text" name="other_things" class="form-control" placeholder="Others" style="width: 50%;">
-                            <input type="text" name="password_of_mobile" class="form-control" placeholder="Password" style="width: 50%;">
-                        </div>
+                        <label for="customer email">Model: </label>
+                        <input type="text" name="mobile_model" class="form-control half-width" placeholder="Model">
+                        <label for="customer email">IMEI : </label>
+                        <input type="text" name="mobile_imei" class="form-control half-width" maxlength="15" placeholder="IMEI">
+
+
+                        <!-- 50% Width of Inputs -->
+                        <label for="customer email">Others: </label>
+                        <input type="text" name="other_things" class="form-control half-width" placeholder="Others">
+                        <label for="customer email">Password: </label>
+                        <input type="text" name="password_of_mobile" class="form-control half-width" placeholder="Password">
+                        
 
                         <!-- 100% Width of Inputs -->
+                        <label class="checkbox" for="ld">Liquid Damaged</label>
+                        <input type="checkbox" class="full-width" name="liquid_damaged">
+                        <label class="checkbox" for="pd">Physical Damaged</label>
+                        <input type="checkbox" class="full-width" name="physical_damaged">
+                        <label class="checkbox" for="temp">Tempered</label>
+                        <input type="checkbox" class="full-width" name="tempered">
+                        <hr>
+
+
+                        <label for="condition">Condition</label>
                         <input type="text" name="condition_of_mobile" class="form-control" placeholder="Condition of Mobile">
                         <br>
                         <br>
-                    </div>
 
-                    <!-- START OF FORM ROW -->
-                    <div class="row">
-                        <div class="col-md-8 col-lg-9 col-sm-6 col-xs-6" style="padding-right:0;">
-                            <input type="text" name="problem_in_mobile1" class="form-control" placeholder="Problem">
-                            <input type="text" name="problem_in_mobile2" class="form-control" placeholder="">
-                            <input type="text" name="problem_in_mobile3" class="form-control" placeholder="">
-                            <input type="text" name="problem_in_mobile4" class="form-control" placeholder="">
-                            <input type="text" name="problem_in_mobile5" class="form-control" placeholder="">
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3" style="padding-left:0;">
-                            <input type="text" name="estimate1" class="form-control" placeholder="Amount">
-                            <input type="text" name="estimate2" class="form-control" placeholder="">
-                            <input type="text" name="estimate3" class="form-control" placeholder="">
-                            <input type="text" name="estimate4" class="form-control" placeholder="">
-                            <input type="text" name="estimate5" class="form-control" placeholder="">
-                        </div>
-                    </div>
+                        <label for="problem">Problem Description</label>
+                        <input type="text" name="problem_in_mobile" class="form-control" placeholder="Problem Description">
+                        <label for="amount">Amount</label>
+                        <input type="text" name="estimate" class="form-control" placeholder="Amount">
+                        <br>
+                        <hr>
 
-                    
-                    <input type="submit" value="Submit Jobsheet" name="submit_job" class="btn btn-primary">
-                    <!-- END OF FORM ROW -->
+                        <!-- NOTE COLUMN -->
+                        <div class="note">
+                            <p><b>NOTE :</b></p>
+                            <ol>
+                                <li>In case if your phone has been repaired elsewhere, It will be repaired on customer's risk.</li>
+                                <li>If phone is completely dead due to water damaged, after the phone has been repaired to working condition, will be leived extra charges for repair.</li>
+                                <li>By singing the Jobsheet, <b>I agree to all terms and conditions above.</b></li>
+                                <br>
+                                <p><b>THANKYOU FOR YOUR BUSINESS!!!</b></p>
+                            </ol>                       
+                        </div>
+                        
+                        <!-- END OF NOTE COLUMN -->
+
+                        <!-- SIGNATURE COLUMN -->
+                        <div class="signature">
+                            <p><b>Customer's Signature</b></p>
+                        </div>  
+                        <br><br>
+                        <!-- END OF SIGNATURE COLUMN -->
+                        <input type="submit" value="Submit Jobsheet" name="submit_job" class="btn btn-primary">
+                    </div>
                 </form>
                 <!-- END OF FORM -->
             </div>
