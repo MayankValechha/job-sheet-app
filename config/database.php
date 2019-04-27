@@ -1,7 +1,13 @@
 <?php 
 
+    //Defining Constants for Database
+    define("HOST", 'localhost');
+    define("USER", 'root');
+    define("PASSWORD", '123456');
+    define("DB", 'job_sheet_app');
+
     //Connect to MYSQL
-    $db_connect = mysqli_connect('localhost', 'root', '123456', 'job_sheet_app');
+    $db_connect = mysqli_connect(HOST, USER, PASSWORD, DB);
 
     //Test Connection
     if(mysqli_connect_errno()) {
