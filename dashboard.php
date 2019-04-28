@@ -17,13 +17,13 @@
         //Setting Shop ID in SESSIONS for CreateJobsheet page
         $_SESSION['shop_id'] = $shop['shop_id'];
         // Dashboard Main Functionalities
-        $query = "SELECT * FROM `jobsheet`";
+        // $query = "SELECT * FROM `jobsheet`";
 
-        $results = mysqli_query($db_connect, $query);
+        // $results = mysqli_query($db_connect, $query);
 
-        $data = mysqli_fetch_all($results, MYSQLI_ASSOC);
+        // $data = mysqli_fetch_all($results, MYSQLI_ASSOC);
         
-        var_dump($data);
+        // var_dump($data);
     }
 ?>
 
@@ -52,9 +52,6 @@
         <br>
         <h3><a href="viewProfile.php">View Profile</a></h3>
 
-        <?php foreach($data as $dataa) : ?>
-    
-        <?php endforeach;?>
         <br><br>
         
         <!-- Shopkeeper Details -->
@@ -71,7 +68,10 @@
 
     <!-- If user is not logged In! -->
     <?php if(!isset($_SESSION['username'])): ?>
-        <p class="alert alert-danger"><?php echo "You need to login first to access this page!"; ?></p>
+        <p class="alert alert-danger text-center"><?php echo "You need to login first to access this page!"; ?></p>
+        <img src="imgs/loading 5.gif" style="display: block; margin: auto;">
+        <h3 class="text-center">Redirecting to Login Page in 5 seconds!</h3>
+        <?php header('Refresh: 6; url=login.php'); ?>
     <?php endif;?>
     
     <!-- Testing Purpose -->    

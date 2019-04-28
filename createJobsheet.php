@@ -1,7 +1,9 @@
 <?php
     
+    // Setting Time format for India
+    date_default_timezone_set("Asia/Kolkata");
+
     session_start();
-    // var_dump($_SESSION);    
 
     require 'config/database.php';
 
@@ -14,6 +16,21 @@
     
         $shop_info = mysqli_fetch_assoc($result);
     }
+    
+
+    //Getting a new Jobsheet Number
+    $query = "SELECT * FROM `jobsheet` where shop_id = '$shop_id'";
+    
+    $result = mysqli_query($db_connect, $query);
+
+    $data = mysqli_num_rows($result);
+
+    /*
+        Storing Jobsheet number in $totalJobsheets variable
+        Incrementing $data variable's value to get a new number sequentially
+    */
+    $totalJobsheets = ++$data;
+
 
     //Checking if Jobsheet is Submitted
     if(isset($_POST['submit_job'])) {
@@ -105,6 +122,9 @@
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
     <title>Create Jobsheet | Job Sheet Application</title>
     <link rel="stylesheet" href="css/jobsheet-style.css">
+    
+    <!-- Refreshing Page every 10 seconds -->
+    <!-- <meta http-equiv="refresh" content="10" >  -->
 </head>
 
 <body>
@@ -127,8 +147,9 @@
                         </div>
 
                         <div class="col-md-4 col-lg-3 col-sm-6">
-                            <p><b>Job No.:</b> 50</p>
-                            <p><b>Date: </b><?php echo date("d/M/Y"); ?></p>
+                            <p><b>Job No. : </b><?php echo $totalJobsheets; ?></p>
+                            <p><b>Date : </b><?php echo date("d/M/Y"); ?></p>
+                            <p><b>Time : </b><?php echo date("h:i:s A"); ?></p>
                         </div>
                     </div>
                     <!-- END OF SUB-ROW -->

@@ -28,5 +28,5 @@
     <div class="hr"></div>
     <p>Developed and Designed by <span> &copy; Mayank Valechha.</span><b>As a Part of My Minor Project in 3rd Year!</b></p>
     <p><span>Swami Vivekanand College of Engineering, Indore</span></p>
-    <p><span>e-mail : </span>mayank.valechha@yahoo.com</p> 
+    <p><span>&#9993; e-mail : </span>mayank.valechha@yahoo.com</p> 
 </footer>
