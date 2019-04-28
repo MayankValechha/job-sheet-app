@@ -21,18 +21,6 @@
         //Will be incremented on each loop
         $jobsheet_number = 1;
 
-        //Checking if Repaired button is pressed
-        if(isset($_POST['phone_repaired_submit'])) {
-            
-            //Grabbing customer id in $update_id
-            $update_id = $_POST['update_id'];
-            
-            $query = " UPDATE `jobsheet`
-                       SET isRepaired = 1
-                       WHERE customer_id = {$update_id}
-                    ";
-            
-        }
     }
 
     //Classes for Repaired or Not Repaired
@@ -54,84 +42,45 @@
     <!-- Checking if User is Logged! -->
     <?php if($_SESSION['username']): ?>
         <div class="container">
-            <div class="row">
-                <h1 class="my-5">View Jobsheets</h1>
-                <table class="table-responsive table table-bordred table-hover">
-                    <thead>
-                        <tr>
-                            <th>Jobsheet No</th>
-                            <th>Recieving Date</th>
-                            <th>Customer Name</th>
-                            <th>Customer Contact</th>
-                            <th>Customer Email</th>
-                            <th>Model</th>
-                            <th>IMEI</th>
-                            <th>Password</th>
-                            <th>Other Things</th>
-                            <th>Physical Damaged</th>
-                            <th>Liquid Damaged</th>
-                            <th>Tempered</th>
-                            <th>Condition of Mobile</th>
-                            <th>Problem Description</th>
-                            <th>Amount</th>
-                            <th>Repaired</th>
-                            <th>Delivered</th>
-                        </tr>
-                    </thead>
-                    <?php foreach($jobsheets as $jobsheet): ?>
-                        <tbody>
-                                <tr>
-                                    <td><?php echo $jobsheet_number; ?></td>
-                                    <td><?php echo $jobsheet['recieving_date']; ?></td>
-                                    <td><?php echo $jobsheet['customer_name']; ?></td>
-                                    <td><?php echo $jobsheet['customer_contact']; ?></td>
-                                    <td><?php echo $jobsheet['customer_email']; ?></td>
-                                    <td><?php echo $jobsheet['imei']; ?></td>
-                                    <td><?php echo $jobsheet['model']; ?></td>
-                                    <td><?php echo $jobsheet['password']; ?></td>
-                                    <td><?php echo $jobsheet['other_things']; ?></td>
-                                    
-                                    <!-- Changing Values from 0 to No and 1 to Yes -->
-                                    <td>
-                                        <?php if($jobsheet['isPhysicalDamaged'] == 1 ):?>
-                                            <?php echo "Physical Damaged"; ?>
-                                        <?php else :?>
-                                            <?php echo "No"; ?>
-                                        <?php endif;?>
-                                    </td>
-                                    <td>
-                                        <?php if($jobsheet['isLiquidDamaged'] == 1 ):?>
-                                            <?php echo "Liquid Damaged"; ?>
-                                        <?php else :?>
-                                            <?php echo "No"; ?>
-                                        <?php endif;?>
-                                    </td>
-                                    <td>
-                                        <?php if($jobsheet['isTempered'] == 1 ):?>
-                                            <?php echo "Tempered"; ?>
-                                        <?php else :?>
-                                            <?php echo "No"; ?>
-                                        <?php endif;?>
-                                    </td>
-
-                                    <td><?php echo $jobsheet['condition_of_mobile']; ?></td>
-                                    <td><?php echo $jobsheet['problem_description']; ?></td>
-                                    <td><?php echo $jobsheet['estimated_amount']; ?></td>
-                                    <td><?php echo $jobsheet['isRepaired']; ?></td>
-                                    <td><?php echo $jobsheet['isDelivered']; ?></td>
-                                    <?php $jobsheet_number++; ?>
-                                    
-                                    <td>
-                                        <form action="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="form-group">
-                                            <input type="hidden" name="update_id" value="<?php echo $jobsheet['customer_id']; ?>">
-                                            <input type="submit" value="Repaired" name="phone_repaired_submit" class="form-control btn-btn primary">
-                                        </form>
-                                    </td>
-                                </tr>
-                        </tbody>
-                    <?php endforeach; ?>
-                </table>
-            </div>
+            <h1 class="mt-5">View All Jobsheets</h1>
+            <h4 class="mb-5">Click on <span class="bg-dark font-weight-bold text-white">View Jobsheet</span> to get more details.</h4>
+            <table class="table-responsive table table-bordred table-hover">
+                <thead>
+                    <tr>
+                        <th>Jobsheet No</th>
+                        <th>Date & Time</th>
+                        <th>Customer Name</th>
+                        <th>Customer Contact</th>
+                        <th>Model</th>
+                        <th>Password</th>
+                        <th>Problem Description</th>
+                        <th>Amount</th>
+                        <th>Repaired</th>
+                        <th>Delivered</th>
+                    </tr>
+                </thead>
+                <?php foreach($jobsheets as $jobsheet): ?>
+                    <tbody>
+                            <tr>
+                                <td><?php echo $jobsheet_number; ?></td>
+                                <td><?php echo date('d/M/Y h:i A', strtotime($jobsheet['recieving_date'])); ?></td>
+                                <td><?php echo $jobsheet['customer_name']; ?></td>
+                                <td><?php echo $jobsheet['customer_contact']; ?></td>
+                                <td><?php echo $jobsheet['model']; ?></td>
+                                <td><?php echo $jobsheet['password']; ?></td>                                
+                                <td><?php echo $jobsheet['problem_description']; ?></td>
+                                <td><?php echo $jobsheet['estimated_amount']; ?></td>
+                                <td><?php echo $jobsheet['isRepaired']; ?></td>
+                                <td><?php echo $jobsheet['isDelivered']; ?></td>
+                                <?php $jobsheet_number++; ?>
+                                
+                                <td>
+                                    <a href="jobsheet.php?id=<?php echo $jobsheet['customer_id']; ?>" class="btn btn-primary font-weight-bold">View Jobsheet</a>
+                                </td>
+                            </tr>
+                    </tbody>
+                <?php endforeach; ?>
+            </table>
         </div>
     <?php endif;?>
 
