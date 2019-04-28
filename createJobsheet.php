@@ -184,12 +184,12 @@
                         
 
                         <!-- 100% Width of Inputs -->
-                        <label class="checkbox" for="ld">Liquid Damaged</label>
                         <input type="checkbox" class="full-width" name="liquid_damaged">
-                        <label class="checkbox" for="pd">Physical Damaged</label>
+                        <label class="checkbox" for="ld">Liquid Damaged</label>
                         <input type="checkbox" class="full-width" name="physical_damaged">
-                        <label class="checkbox" for="temp">Tempered</label>
+                        <label class="checkbox" for="pd">Physical Damaged</label>
                         <input type="checkbox" class="full-width" name="tempered">
+                        <label class="checkbox" for="temp">Tempered</label>
                         <hr>
 
 
@@ -225,7 +225,8 @@
                         </div>  
                         <br><br>
                         <!-- END OF SIGNATURE COLUMN -->
-                        <input type="submit" value="Submit Jobsheet" name="submit_job" class="btn btn-primary">
+                        <input type="submit" value="Submit Jobsheet" id="submit" name="submit_job" class="font-weight-bold btn btn-primary">
+                        <input type="button" value="Print Jobsheet" id="print" onClick="getPrintDialog();" class="font-weight-bold btn btn-secondary">
                     </div>
                 </form>
                 <!-- END OF FORM -->
@@ -234,5 +235,26 @@
         <!-- END OF MAIN ROW -->
     </div>
     <!-- END OF CONTAINER -->
+
+    <!-- File for opening print dialog box -->
+    <script>
+        function getPrintDialog() {
+            const submitButton = document.getElementById('submit');
+            const printButton = document.getElementById('print');
+
+            //Not Displaying both the Buttons when Print Jobsheet
+            document.title = window.parent.document.title = "<?php echo $shop_info['name']." : Jobsheet No ".$totalJobsheets?>";
+
+            submitButton.style.display = "none";
+            printButton.style.display = "none";
+            window.print();
+
+            document.title = window.parent.document.title = "";
+
+            //When Back on the CreateJobsheet page, buttons will be back
+            submitButton.style.display = "";
+            printButton.style.display = "";
+        }
+    </script>
 </body>
 </html>
