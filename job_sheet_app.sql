@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2019 at 12:07 AM
+-- Generation Time: Apr 28, 2019 at 10:40 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -29,18 +29,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `jobsheet` (
+  `customer_id` int(11) NOT NULL,
   `customer_name` varchar(100) NOT NULL,
   `customer_contact` varchar(50) NOT NULL,
   `customer_email` varchar(50) NOT NULL,
   `recieving_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `brand` varchar(50) NOT NULL,
-  `imei` varchar(15) NOT NULL,
   `model` varchar(25) NOT NULL,
+  `imei` varchar(15) NOT NULL,
   `password` varchar(15) NOT NULL,
   `other_things` varchar(25) NOT NULL,
+  `isTempered` tinyint(1) DEFAULT '0',
+  `isPhysicalDamaged` tinyint(1) DEFAULT '0',
+  `isLiquidDamaged` tinyint(1) DEFAULT '0',
   `condition_of_mobile` varchar(100) NOT NULL,
   `problem_description` varchar(100) NOT NULL,
   `estimated_amount` varchar(10) NOT NULL,
+  `isRepaired` tinyint(1) DEFAULT '0',
+  `isDelivered` tinyint(1) DEFAULT '0',
+  `isReturned` tinyint(1) NOT NULL DEFAULT '0',
+  `delivery_time` datetime DEFAULT NULL,
   `shop_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -48,12 +55,17 @@ CREATE TABLE `jobsheet` (
 -- Dumping data for table `jobsheet`
 --
 
-INSERT INTO `jobsheet` (`customer_name`, `customer_contact`, `customer_email`, `recieving_date`, `brand`, `imei`, `model`, `password`, `other_things`, `condition_of_mobile`, `problem_description`, `estimated_amount`, `shop_id`) VALUES
-('', '', '', '2019-04-10 03:29:11', '', '', '', '', '', '', '', '', 8),
-('', '', '', '2019-04-10 03:29:15', '', '', '', '', '', '', '', '', 8),
-('Mayank Valechha', '', '', '2019-04-10 03:32:51', '', '', '', '', '', '', '', '', 8),
-('Mayank Valechha', '9329377750', 'mayank@email.com', '2019-04-10 03:33:04', '', 'Apple iPhone 6S', '123456789012345', '0000', 'No', 'Liquid Damaged', 'Dead Recieved', '1000', 8),
-('Sagar Paraswal', '8878841872', 'sagar@gmail.com', '2019-04-10 03:37:18', '', 'Apple iPhone 6S', '123456789000000', '1234', 'Cover', 'Tempered', 'Display Issue', '3000', 2);
+INSERT INTO `jobsheet` (`customer_id`, `customer_name`, `customer_contact`, `customer_email`, `recieving_date`, `model`, `imei`, `password`, `other_things`, `isTempered`, `isPhysicalDamaged`, `isLiquidDamaged`, `condition_of_mobile`, `problem_description`, `estimated_amount`, `isRepaired`, `isDelivered`, `isReturned`, `delivery_time`, `shop_id`) VALUES
+(4, 'Mayank Valechha', '9329377750', 'mayank@email.com', '2019-04-10 03:33:04', '123456789012345', 'Apple iPhone 6S', '0000', 'No', NULL, NULL, NULL, 'Liquid Damaged', 'Dead Recieved', '1000', 0, 0, 0, '0000-00-00 00:00:00', 8),
+(5, 'Sagar Paraswal', '8878841872', 'sagar@gmail.com', '2019-04-10 03:37:18', '123456789000000', 'Apple iPhone 6S', '1234', 'Cover', NULL, NULL, NULL, 'Tempered', 'Display Issue', '3000', 1, 1, 0, '0000-00-00 00:00:00', 2),
+(6, 'Mayank Valechha', '8878841872', 'mayank@email.com', '2019-04-20 01:26:21', '123456789012345', 'Apple iPhone 6S', '0000', 'No', NULL, NULL, NULL, 'Tempered', 'Display Issue', '1000', 0, 1, 1, '0000-00-00 00:00:00', 2),
+(7, 'Darpan', '9893012345', 'darpan@gmail.com', '2019-04-24 00:58:31', 'Apple iPhone X', '123456654321000', '0012', 'No', 0, 0, 0, 'Ok', 'Software Issue', '350', 1, 0, 0, '0000-00-00 00:00:00', 6),
+(12, 'Mayank Valechha', '9926427904', 'mayank@email.com', '2019-04-26 11:30:46', 'iPhone XR', '123456789012345', 'No', 'No', 0, 0, 0, 'Ok', 'Dead Recieved', '3000', 0, 0, 0, '0000-00-00 00:00:00', 6),
+(13, 'Mayank Valechha', '9329377750', 'mayank@email.com', '2019-04-26 11:42:02', 'Apple iPhone 6S', '123456789012345', '0000', 'No', 0, 0, 1, 'Tempered', 'Dead Recieved', '3000', 0, 0, 0, '0000-00-00 00:00:00', 6),
+(14, 'Darpan', '9329377750', 'darpan@gmail.com', '2019-04-26 11:45:25', 'Apple iPhone X', '123456789012345', '0000', 'No', 0, 1, 1, 'Tempered', 'Water Damaged', '4000', 0, 0, 0, '0000-00-00 00:00:00', 6),
+(15, 'Mayank Valechha', '9329377750', 'mayank@email.com', '2019-04-27 02:42:35', 'Apple iPhone 6S', '123456789000000', '0000', 'No', 1, 1, 1, 'Ok', 'Water Damage', '1500', 0, 0, 0, '0000-00-00 00:00:00', 6),
+(17, 'Mayank Valechha', '9329377750', 'mayank@email.com', '2019-04-28 22:41:38', 'Apple iPhone 6S', '123456789012345', '0000', 'No', 0, 1, 1, 'Tempered', 'Water Damage', '1500', 1, 0, 0, '0000-00-00 00:00:00', 2),
+(19, 'Lakshya Khatri', '8109300610', 'lakshak67@gmail.com', '2019-04-29 02:01:32', 'iPhone XS Max', '111111111111111', '123456', 'No', 0, 1, 0, '', 'Display Broken', '35000', 0, 0, 0, '0000-00-00 00:00:00', 2);
 
 -- --------------------------------------------------------
 
@@ -101,6 +113,7 @@ CREATE TABLE `totaljobsheet` (
 -- Indexes for table `jobsheet`
 --
 ALTER TABLE `jobsheet`
+  ADD PRIMARY KEY (`customer_id`),
   ADD KEY `shop_id` (`shop_id`);
 
 --
@@ -119,6 +132,12 @@ ALTER TABLE `totaljobsheet`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `jobsheet`
+--
+ALTER TABLE `jobsheet`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `shopkeepers`
