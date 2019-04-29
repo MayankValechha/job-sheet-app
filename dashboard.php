@@ -16,14 +16,8 @@
 
         //Setting Shop ID in SESSIONS for CreateJobsheet page
         $_SESSION['shop_id'] = $shop['shop_id'];
-        // Dashboard Main Functionalities
-        // $query = "SELECT * FROM `jobsheet`";
+        $_SESSION['shop_name'] = $shop['name'];
 
-        // $results = mysqli_query($db_connect, $query);
-
-        // $data = mysqli_fetch_all($results, MYSQLI_ASSOC);
-        
-        // var_dump($data);
     }
 ?>
 
