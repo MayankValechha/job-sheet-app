@@ -96,7 +96,7 @@
         }
 
         //Query for Updating
-        $query = "UPDATE `jobsheet` SET isRepaired=0, isDelivered=1, isReturned=1 WHERE customer_id={$update_id}";
+        $query = "UPDATE `jobsheet` SET isRepaired=0, isDelivered=1, isReturned=1, estimated_amount=0 WHERE customer_id={$update_id}";
         
         if(mysqli_query($db_connect, $query)) {
             header('Location: viewJobsheets.php');
