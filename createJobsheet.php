@@ -162,25 +162,34 @@
                     <div class="form-group" style="margin:0;">
                         <!-- 100% Width of Inputs -->
                         <label for="customer name">Customer Name : </label>
-                        <input type="text" name="customer_name" class="form-control" placeholder="Customer Name">
+                        <input type="text" name="customer_name" class="form-control" placeholder="Customer Name" required oninvalid="this.setCustomValidity('Enter Customer\'s Name')"
+                        oninput="this.setCustomValidity('')">
+                        
                         <label for="customer contact">Customer Contact : </label>
-                        <input type="text" name="customer_contact" class="form-control" placeholder="Customer Contact">
+                        <input type="text" name="customer_contact" class="form-control" placeholder="Customer Contact" required oninvalid="this.setCustomValidity('Enter Customer\'s Contact Number')"
+                        oninput="this.setCustomValidity('')">
+                        
                         <label for="customer email">Customer Email : </label>
                         <input type="text" name="customer_email" class="form-control" placeholder="Customer Email">
+                    
+
+                        <!-- 50% Width of Inputs -->
+                        <label for="customer model">Model: </label>
+                        <input type="text" name="mobile_model" class="form-control half-width" placeholder="Model" required oninvalid="this.setCustomValidity('Enter Customer\'s Mobile Model')"
+                        oninput="this.setCustomValidity('')">
+                        <label for="customer imei">IMEI : </label>
+                        <input type="text" name="mobile_imei" class="form-control half-width" maxlength="15" placeholder="IMEI" required oninvalid="this.setCustomValidity('Enter Customer\'s Mobile IMEI')"
+                        oninput="this.setCustomValidity('')">
+
+
+                        <!-- 50% Width of Inputs -->
+                        <label for="customer other things">Others: </label>
+                        <input type="text" name="other_things" class="form-control half-width" placeholder="Others" required oninvalid="this.setCustomValidity('Enter Customer\'s Other things')"
+                        oninput="this.setCustomValidity('')">
                         
-
-                        <!-- 50% Width of Inputs -->
-                        <label for="customer email">Model: </label>
-                        <input type="text" name="mobile_model" class="form-control half-width" placeholder="Model">
-                        <label for="customer email">IMEI : </label>
-                        <input type="text" name="mobile_imei" class="form-control half-width" maxlength="15" placeholder="IMEI">
-
-
-                        <!-- 50% Width of Inputs -->
-                        <label for="customer email">Others: </label>
-                        <input type="text" name="other_things" class="form-control half-width" placeholder="Others">
-                        <label for="customer email">Password: </label>
-                        <input type="text" name="password_of_mobile" class="form-control half-width" placeholder="Password">
+                        <label for="customer password">Password: </label>
+                        <input type="text" name="password_of_mobile" class="form-control half-width" placeholder="Password" required oninvalid="this.setCustomValidity('Enter Customer\'s Mobile Password')"
+                        oninput="this.setCustomValidity('')">
                         
 
                         <!-- 100% Width of Inputs -->
@@ -194,14 +203,17 @@
 
 
                         <label for="condition">Condition</label>
-                        <input type="text" name="condition_of_mobile" class="form-control" placeholder="Condition of Mobile">
+                        <input type="text" name="condition_of_mobile" class="form-control" placeholder="Condition of Mobile"  required oninvalid="this.setCustomValidity('Enter Customer\'s Mobile Current Condition at Recieving Time')"
+                        oninput="this.setCustomValidity('')">
                         <br>
                         <br>
 
                         <label for="problem">Problem Description</label>
-                        <input type="text" name="problem_in_mobile" class="form-control" placeholder="Problem Description">
+                        <input type="text" name="problem_in_mobile" class="form-control" placeholder="Problem Description" required required oninvalid="this.setCustomValidity('Enter Customer\'s Mobile Problem')"
+                        oninput="this.setCustomValidity('')">
                         <label for="amount">Amount</label>
-                        <input type="text" name="estimate" class="form-control" placeholder="Amount">
+                        <input type="text" name="estimate" class="form-control" placeholder="Amount" required oninvalid="this.setCustomValidity('Enter Total repairing charges')"
+                        oninput="this.setCustomValidity('')">
                         <br>
                         <hr>
 
