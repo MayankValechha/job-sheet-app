@@ -7,8 +7,8 @@
 
     require 'config/database.php';
 
-    if(isset($_SESSION['shopID'])) {
-        $shop_id = $_SESSION['shopID'];
+    if(isset($_SESSION['shop_id'])) {
+        $shop_id = $_SESSION['shop_id'];
 
         $query = "SELECT * FROM `shopkeepers` WHERE shop_id = '$shop_id'";
 
@@ -17,117 +17,120 @@
         $shop_info = mysqli_fetch_assoc($result);
     }
     
-
-    //Getting a new Jobsheet Number
-    $query = "SELECT * FROM `jobsheet` where shop_id = '$shop_id'";
-    
-    $result = mysqli_query($db_connect, $query);
-
-    $data = mysqli_num_rows($result);
-
-    /*
-        Storing Jobsheet number in $totalJobsheets variable
-        Incrementing $data variable's value to get a new number sequentially
-    */
-    $totalJobsheets = ++$data;
-
-
-    //Checking if Jobsheet is Submitted
-    if(isset($_POST['submit_job'])) {
-
-        //Grabbing all form fields
-        $shop_ID = $_SESSION['shopID'];
-        $customer_name = mysqli_real_escape_string($db_connect, $_POST['customer_name']);
-        $customer_contact = mysqli_real_escape_string($db_connect, $_POST['customer_contact']);
-        $customer_email = mysqli_real_escape_string($db_connect, $_POST['customer_email']);
-
-        $mobile_model = mysqli_real_escape_string($db_connect, $_POST['mobile_model']);
-        $mobile_imei = mysqli_real_escape_string($db_connect, $_POST['mobile_imei']);
-        $other_things = mysqli_real_escape_string($db_connect, $_POST['other_things']);
-        $password_of_mobile = mysqli_real_escape_string($db_connect, $_POST['password_of_mobile']);
-        $condition_of_mobile = mysqli_real_escape_string($db_connect, $_POST['condition_of_mobile']);
+    if(isset($_SESSION['username'])) {
+        //Getting a new Jobsheet Number
+        $query = "SELECT * FROM `jobsheet` where shop_id = '$shop_id'";
         
-        //Getting Checkbox values
-        $liquid_damaged = $_POST['liquid_damaged'];
-        $physical_damaged = $_POST['physical_damaged'];
-        $tempered = $_POST['tempered'];
+        $result = mysqli_query($db_connect, $query);
 
-        if(isset($_POST['liquid_damaged'])) {
-            $liquid_damaged = true;
-        }
+        $data = mysqli_num_rows($result);
 
-        if(isset($_POST['physical_damaged'])) {
-            $physical_damaged = true;
-        }
+        /*
+            Storing Jobsheet number in $totalJobsheets variable
+            Incrementing $data variable's value to get a new number sequentially
+        */
+        $totalJobsheets = ++$data;
 
-        if(isset($_POST['tempered'])) {
-            $tempered = true;
-        }
 
-        //Casting amount variable into int
-        $problem = mysqli_real_escape_string($db_connect, $_POST['problem_in_mobile']);
-        $amount = (int)mysqli_real_escape_string($db_connect, $_POST['estimate']);
+        //Checking if Jobsheet is Submitted
+        if(isset($_POST['submit_job'])) {
 
-        $query = "
-                    INSERT INTO `jobsheet`
-                    (customer_name, 
-                    customer_contact, 
-                    customer_email, 
-                    imei, 
-                    model, 
-                    password, 
-                    other_things, 
-                    condition_of_mobile,
-                    isLiquidDamaged,
-                    isPhysicalDamaged,
-                    isTempered,
-                    problem_description, 
-                    estimated_amount, 
-                    shop_id)
-                    VALUES
-                    ('$customer_name', 
-                    '$customer_contact', 
-                    '$customer_email', 
-                    '$mobile_imei', 
-                    '$mobile_model', 
-                    '$password_of_mobile', 
-                    '$other_things', 
-                    '$condition_of_mobile',
-                    '$liquid_damaged',
-                    '$physical_damaged',
-                    '$tempered',
-                    '$problem', 
-                    '$amount', 
-                    '$shop_ID')";
-                            
-        if(!mysqli_query($db_connect, $query)) 
-        {
-            die('Error : '.mysqli_errno($db_connect));
-        }
-        else 
-        {  
-            header('Location: dashboard.php');
-            //Alert: New Jobsheet has been created.
-            exit();
+            //Grabbing all form fields
+            $shop_ID = $_SESSION['shop_id'];
+            $customer_name = mysqli_real_escape_string($db_connect, $_POST['customer_name']);
+            $customer_contact = mysqli_real_escape_string($db_connect, $_POST['customer_contact']);
+            $customer_email = mysqli_real_escape_string($db_connect, $_POST['customer_email']);
+
+            $mobile_model = mysqli_real_escape_string($db_connect, $_POST['mobile_model']);
+            $mobile_imei = mysqli_real_escape_string($db_connect, $_POST['mobile_imei']);
+            $other_things = mysqli_real_escape_string($db_connect, $_POST['other_things']);
+            $password_of_mobile = mysqli_real_escape_string($db_connect, $_POST['password_of_mobile']);
+            $condition_of_mobile = mysqli_real_escape_string($db_connect, $_POST['condition_of_mobile']);
+            
+            //Getting Checkbox values
+            $liquid_damaged = $_POST['liquid_damaged'];
+            $physical_damaged = $_POST['physical_damaged'];
+            $tempered = $_POST['tempered'];
+
+            if(isset($_POST['liquid_damaged'])) {
+                $liquid_damaged = true;
+            }
+
+            if(isset($_POST['physical_damaged'])) {
+                $physical_damaged = true;
+            }
+
+            if(isset($_POST['tempered'])) {
+                $tempered = true;
+            }
+
+            //Casting amount variable into int
+            $problem = mysqli_real_escape_string($db_connect, $_POST['problem_in_mobile']);
+            $amount = (int)mysqli_real_escape_string($db_connect, $_POST['estimate']);
+
+            $query = "
+                        INSERT INTO `jobsheet`
+                        (customer_name, 
+                        customer_contact, 
+                        customer_email, 
+                        imei, 
+                        model, 
+                        password, 
+                        other_things, 
+                        condition_of_mobile,
+                        isLiquidDamaged,
+                        isPhysicalDamaged,
+                        isTempered,
+                        problem_description, 
+                        estimated_amount, 
+                        shop_id)
+                        VALUES
+                        ('$customer_name', 
+                        '$customer_contact', 
+                        '$customer_email', 
+                        '$mobile_imei', 
+                        '$mobile_model', 
+                        '$password_of_mobile', 
+                        '$other_things', 
+                        '$condition_of_mobile',
+                        '$liquid_damaged',
+                        '$physical_damaged',
+                        '$tempered',
+                        '$problem', 
+                        '$amount', 
+                        '$shop_ID')";
+                                
+            if(!mysqli_query($db_connect, $query)) 
+            {
+                die('Error : '.mysqli_errno($db_connect));
+            }
+            else 
+            {  
+                header('Location: dashboard.php');
+                //Alert: New Jobsheet has been created.
+                exit();
+            }
         }
     }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
-    <title>Create Jobsheet | Job Sheet Application</title>
-    <link rel="stylesheet" href="css/jobsheet-style.css">
-    
-    <!-- Refreshing Page every 10 seconds -->
-    <!-- <meta http-equiv="refresh" content="10" >  -->
-</head>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+        <title>Create Jobsheet | Job Sheet Application</title>
+        <link rel="stylesheet" href="css/jobsheet-style.css">
+    </head>
 <body>
+
+<!-- If user is not logged in, below code will run -->
+<?php include 'includes/usernot_set.php'; ?>
+
+<?php if(isset($_SESSION['username'])) :?>
+    <?php include 'includes/navbar.php'; ?>
     <!-- NEW STYLING -->
     <!-- START OF CONTAINER -->
     <div class="container">
@@ -246,6 +249,7 @@
         </div>
         <!-- END OF MAIN ROW -->
     </div>
+<?php endif; ?>
     <!-- END OF CONTAINER -->
 
     <!-- File for opening print dialog box -->
@@ -268,5 +272,6 @@
             printButton.style.display = "";
         }
     </script>
+    <?php include 'includes/scripts.php'; ?>
 </body>
 </html>

@@ -13,7 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <title>Login Shopkeeper | Job Sheet Application</title>
     <style>
         label {
@@ -46,11 +47,13 @@
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
                             <label for="shop-contact">Contact Number</label>
-                            <input type="number" name="username" required class="form-control">
+                            <input type="number" name="username" required class="form-control" required oninvalid="this.setCustomValidity('Please Enter Your Registere Contact Number')"
+                        oninput="this.setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="shop-password">Password</label>
-                            <input type="password" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control" required oninvalid="this.setCustomValidity('Enter Password')"
+                        oninput="this.setCustomValidity('')">
                         </div>
                         <input type="submit" name="login_user" value="Login" class="btn btn-primary">
                         <br>

@@ -11,9 +11,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">    
     <title>Register Shopkeeper | Job Sheet Application</title>
-
     <style>
         label {
             font-weight: bold;   
@@ -41,15 +41,18 @@
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <div class="form-group">
                             <label for="shop-name">Shop Name</label>
-                            <input type="text" name="shop_name" class="form-control" required>
+                            <input type="text" name="shop_name" class="form-control" required oninvalid="this.setCustomValidity('Enter Shop\'s Name')"
+                        oninput="this.setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="shop-address">Shop Address</label>
-                            <input type="text" name="shop_address"  class="form-control" required>
+                            <input type="text" name="shop_address"  class="form-control" required oninvalid="this.setCustomValidity('Enter Shop\'s Address')"
+                        oninput="this.setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="shop-contact">Contact Number</label>
-                            <input type="number" name="shop_contact"  class="form-control" required>
+                            <input type="number" name="shop_contact"  class="form-control" required oninvalid="this.setCustomValidity('Enter Shop\'s Contact Number')"
+                        oninput="this.setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="shop-contact">Email (optional)</label>
@@ -57,11 +60,13 @@
                         </div>
                         <div class="form-group">
                             <label for="shop-contact">Password</label>
-                            <input type="password" name="password" placeholder="Minimum 6 characters" class="form-control" required>
+                            <input type="password" name="password" placeholder="Minimum 6 characters" class="form-control" required oninvalid="this.setCustomValidity('Enter Password')"
+                        oninput="this.setCustomValidity('')">
                         </div>
                         <div class="form-group">
                             <label for="shop-contact">Confirm Password</label>
-                            <input type="password" name="confirm_password" class="form-control" required>
+                            <input type="password" name="confirm_password" class="form-control" required oninvalid="this.setCustomValidity('Please confirm the Password')"
+                        oninput="this.setCustomValidity('')">
                         </div>
                         <input type="submit" name="register_user" value="Register" class="btn btn-primary" >
                         <br>

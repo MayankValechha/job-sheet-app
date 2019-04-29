@@ -29,8 +29,10 @@
         //Checking if fields are empty
         if(empty($shop_name)){ array_push($errors, 'Shop Name cannot be empty!'); }
         if(empty($shop_address)){ array_push($errors, 'Shop Address cannot be empty!'); }
-        if(empty($shop_contact)){ array_push($errors, 'Shop Contact cannot be empty!'); }
-        
+
+        if(empty($shop_contact) || strlen($shop_contact) != 10 ) {
+            array_push($errors, 'Mobile Number cannot be empty or Not less than 10 Digits.');
+        }        
         if($password !== $confirm_password) { array_push($errors, 'Password does not match!'); }
 
 
@@ -58,14 +60,17 @@
             $query = "INSERT INTO `shopkeepers` (name, address, email, contact, password) 
                     VALUES ('$shop_name', '$shop_address', '$shop_email', '$shop_contact', '$password_enc')";
             
-            mysqli_query($db_connect, $query);
+            if(mysqli_query($db_connect, $query)) {
 
-            $_SESSION['username'] = $shop_name;
-            $_SESSION['success'] = "You are logged in!";
-            $_SESSION['successful'] = "Your account has been created succesfully! Login below";
+                $_SESSION['username'] = $shop_name;
+                $_SESSION['success'] = "You are logged in!";
+                $_SESSION['successful'] = "Your account has been created succesfully! Login below";
 
-            header('Location: login.php');
-            
+                header('Location: login.php');
+            }
+            else {
+                header('Location: login.php');
+            }
         }
     }
 

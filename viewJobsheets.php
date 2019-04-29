@@ -35,12 +35,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">    
     <title>View Jobsheets | Job Sheet Application</title>
 </head>
 <body>
+
+    <!-- If user is not logged in, below code will run -->
+    <?php include 'includes/usernot_set.php'; ?>
+
+
     <!-- Checking if User is Logged! -->
-    <?php if($_SESSION['username']): ?>
+    <?php if(isset($_SESSION['username'])): ?>
+        <?php include 'includes/navbar.php'; ?>
         <div class="container">
             <h1 class="mt-5">View All Jobsheets</h1>
             <h4 class="mb-5">Click on <span class="bg-dark font-weight-bold text-white">View Jobsheet</span> to get more details.</h4>
@@ -55,7 +62,7 @@
                         <th>Password</th>
                         <th>Problem Description</th>
                         <th>Amount</th>
-                        <th>Repaired</th>
+                        <th>Status</th>
                         <th>Delivered</th>
                     </tr>
                 </thead>
@@ -70,8 +77,35 @@
                                 <td><?php echo $jobsheet['password']; ?></td>                                
                                 <td><?php echo $jobsheet['problem_description']; ?></td>
                                 <td><?php echo $jobsheet['estimated_amount']; ?></td>
-                                <td><?php echo $jobsheet['isRepaired']; ?></td>
-                                <td><?php echo $jobsheet['isDelivered']; ?></td>
+
+                                <!-- <?php if($jobsheet['isRepaired'] == 1 ):?>
+                                        <?php echo "<td>Repaired</td>"; ?>
+                                    <?php else :?>
+                                        <?php echo "<td>Under Repairing</td>"; ?>
+                                <?php endif;?>
+
+                                <?php if($jobsheet['isDelivered'] == 1 ):?>
+                                        <?php echo "<td>Delivered</td>"; ?>
+                                    <?php else :?>
+                                        <?php echo "<td>Not Yet</td>"; ?>
+                                <?php endif;?> -->
+
+                                <?php if($jobsheet['isRepaired'] == 1  && $jobsheet['isDelivered'] == 1): ?>
+                                    <td class="bg-success text-white font-weight-bold"><?php echo "Phone is Repaired and Delivered"; ?></td>
+                                <?php endif; ?>
+
+                                <?php if($jobsheet['isRepaired'] == 0  && $jobsheet['isDelivered'] == 1): ?>
+                                    <td class="bg-danger text-white font-weight-bold"><?php echo "Phone is Retuned without Repair"; ?></td>
+                                <?php endif; ?>
+
+                                <?php if($jobsheet['isRepaired'] == 1  && $jobsheet['isDelivered'] == 0): ?>
+                                    <td class="bg-warning text-white font-weight-bold"><?php echo "Phone is Repaired but not Delivered"; ?></td>
+                                <?php endif; ?>
+
+                                <?php if($jobsheet['isRepaired'] == 0  && $jobsheet['isDelivered'] == 0): ?>
+                                    <td class="bg-warning font-weight-bold"><?php echo "Phone is Under Repairing"; ?></td>
+                                <?php endif; ?>
+                                
                                 <?php $jobsheet_number++; ?>
                                 
                                 <td>
