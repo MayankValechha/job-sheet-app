@@ -43,3 +43,10 @@ This Application is mainly designed for the small __"Mobile Repair Stores"__ to 
 
 ### View Single Jobsheet
 ![View Single Jobhsheet Image](https://github.com/MayankValechha/job-sheet-app/blob/master/img/Project(3).png)
+
+### Updates
+
+In the upcoming versions I'll be adding some new functionalities such as:
+-   [ ] Adding Edit Jobsheet Button
+-   [ ] Print Jobsheet after submitted
+-   [ ] Use of SMS API to send messages to user when phone is Repaired
