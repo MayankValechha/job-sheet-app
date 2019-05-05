@@ -3,8 +3,10 @@
 This repository contains a project named as **"Job Sheet Application"** that I have crated for my Minor Project in 3rd Year.
 I started creating this on **April 1st, 2019** and completed this on midnight of **April 30, 2019**, the day on which I had to present it to my External Examiner! 😄 🤞 
 
+
 ### What is this Application for?
 This Application is mainly designed for the small __"Mobile Repair Stores"__ to keep track of all their **Mobile Repairing Customers**, mainly designed to do entries of their customers along with suitable data.
+
 
 ### Features 💻 ⌨️
   - Shopkeepers can Register and Login in the Application
@@ -19,6 +21,7 @@ This Application is mainly designed for the small __"Mobile Repair Stores"__ to 
     - Total Revenue generated
     - Also shows the latest phones pending for repairing.
 
+
 ### Technology Used
 -   HTML
 -   CSS
@@ -27,7 +30,9 @@ This Application is mainly designed for the small __"Mobile Repair Stores"__ to 
 -   PHP 7.3
 -   MYSQL
 
+
 ### How it Looks 😍 
+
 
 ### Dashboard
 ![Dashboard Image](https://github.com/MayankValechha/job-sheet-app/blob/master/img/Project(1).png)
