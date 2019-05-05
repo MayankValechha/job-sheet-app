@@ -27,4 +27,19 @@ This Application is mainly designed for the small __"Mobile Repair Stores"__ to 
 -   PHP 7.3
 -   MYSQL
 
-### How it Looks
+### How it Looks 😍 
+
+#### Dashboard
+![Dashboard Image](https://github.com/MayankValechha/job-sheet-app/blob/master/img/Project(1).png)
+
+
+#### Create Jobsheet
+![Create Jobsheet Image](https://github.com/MayankValechha/job-sheet-app/blob/master/img/Project(4).png)
+
+
+#### View All Jobsheets
+![View Jobsheet Image](https://github.com/MayankValechha/job-sheet-app/blob/master/img/Project(2).png)
+
+
+#### View Single Jobhsheet
+![View Single Jobhsheet Image](https://github.com/MayankValechha/job-sheet-app/blob/master/img/Project(13.png)
